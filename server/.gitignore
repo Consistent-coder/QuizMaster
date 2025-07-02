@@ -1,0 +1,64 @@
+node_modules
+# Keep environment variables out of version control
+.env
+
+/src/generated/prisma
+
+/src/generated/prisma
+
+# Build output
+dist/
+build/
+
+# TypeScript cache
+*.tsbuildinfo
+
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+
+# Coverage reports
+coverage/
+.nyc_output/
+
+# Optional: PM2 logs (if used)
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Optional: MacOS `.AppleDouble` files
+.AppleDouble
+
+# Optional: TypeDoc output
+docs/
+
+
+# Optional: Lint/styling cache
+.eslintcache
+.prettiercache
+
+# Optional: Firebase / other cloud CLI files
+.firebaserc
+.firebase/
+
+# Prisma
+prisma/migrations/
+prisma/dev.db
+prisma/*.db
+prisma/.env

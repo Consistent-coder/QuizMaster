@@ -1,0 +1,91 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+model User {
+  id String @id @default(uuid())
+  email String @unique
+  name String
+  password String
+  role Role @default(USER)
+  attempts QuizAttempt[]
+  createdQuizzes Quiz[] @relation("AdminCreatedQuizzes")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+
+model Quiz {
+  id String @id @default(uuid())
+  name String
+  description String?
+  topic String
+  createdById String
+  createdBy User @relation("AdminCreatedQuizzes",fields: [createdById],references: [id],onDelete: Cascade)
+  questions Question[]
+  tags Tag[] @relation("QuizTags")
+  attempts QuizAttempt[]
+}
+
+model Question {
+  id String @id @default(uuid())
+  text String
+  review String?
+  quizId String
+  quiz Quiz @relation(fields: [quizId],references: [id],onDelete: Cascade)
+  options Option[]
+  answers Answer[]
+}
+
+model Option {
+  id String @id @default(uuid())
+  text String
+  isCorrect Boolean
+  questionId String
+  question Question @relation(fields: [questionId],references: [id],onDelete: Cascade)
+   answers Answer[]
+}
+
+model QuizAttempt {
+  id String @id @default(uuid())
+  userId String
+  user User @relation(fields: [userId], references: [id],onDelete: Cascade)
+  score Int
+  status String @default("IN_PROGRESS") //or COMPLETED.
+  quizId String
+  quiz Quiz @relation(fields: [quizId], references: [id],onDelete: Cascade)
+  answers Answer[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Answer {
+  id String @id @default(uuid())
+  questionId String
+  question Question @relation(fields: [questionId],references: [id],onDelete: Cascade)
+  selectedOptionId String 
+  selectedOption Option @relation(fields: [selectedOptionId],references: [id],onDelete: Cascade)
+  attemptId        String
+  attempt          QuizAttempt @relation(fields: [attemptId], references: [id], onDelete: Cascade)
+
+  createdAt        DateTime   @default(now())
+}
+
+model Tag {
+  id String @id @default(uuid())
+  name String @unique
+  quizzes Quiz[] @relation("QuizTags")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}

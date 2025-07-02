@@ -1,0 +1,78 @@
+# --- Node Modules ---
+node_modules/
+
+# --- Build Outputs ---
+dist/
+build/
+
+# --- TypeScript ---
+*.tsbuildinfo
+
+# --- Environment Variables ---
+.env
+.env.*
+
+# --- Logs ---
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --- IDEs and Editors ---
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# --- OS-specific ---
+.DS_Store
+Thumbs.db
+
+# --- Coverage ---
+coverage/
+.nyc_output/
+
+# --- Lint/Format ---
+.eslintcache
+.prettiercache
+
+# --- Testing ---
+jest-test-results.json
+test-results/
+
+# --- Vite ---
+.vite
+
+# --- React Cache ---
+.cache/
+
+# --- Misc Build Tools ---
+turbo/
+.vercel/
+.next/
+
+# --- Docs and Reports ---
+docs/
+*.log
+*.tgz
+
+# --- Firebase / Cloud CLI ---
+.firebase/
+.firebaserc
+
+# --- Local Dev Tools ---
+*.local
+*.pid
+*.pid.lock
+*.seed
+
+
+# Prisma
+prisma/migrations/
+prisma/dev.db
+prisma/*.db
+prisma/.env
