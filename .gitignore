@@ -10,7 +10,7 @@ build/
 
 # --- Environment Variables ---
 .env
-.env.*
+# .env.*
 
 # --- Logs ---
 logs/
