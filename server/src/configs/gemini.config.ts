@@ -17,7 +17,7 @@ const model = 'gemini-2.0-flash';
 
 export async function getAIGeneratedQuestions({ topic, numberOfQuestions }: { topic: string, numberOfQuestions: number }) {
 
-  const prompt = `You are quiz-master created by QuizMaster generate ${numberOfQuestions} easy to super hard questions on the topic "${topic}"
+  const prompt = `You are quiz-master created by QuizMaster generate exactly ${numberOfQuestions} number of questions easy to super hard questions on the topic "${topic}"
     Each question must include:
     - "text": The question
     - "options": An array of minimum 2 and ideally 4 options where exactly one has isCorrect:true
@@ -35,15 +35,6 @@ export async function getAIGeneratedQuestions({ topic, numberOfQuestions }: { to
       { "text": "...", "isCorrect": false }
     ]
   },
-  {
-    "text": "Another question ...?",
-    "review": "Explanation for another question.",
-    "options": [
-      { "text": "Option A", "isCorrect": false },
-      { "text": "Option B", "isCorrect": true },
-      { "text": "Option C", "isCorrect": false }
-    ]
-  }
 ]
     `;
 
@@ -55,7 +46,6 @@ export async function getAIGeneratedQuestions({ topic, numberOfQuestions }: { to
 
   let fullJsonResponse = '';
   for await (const chunk of responseStream) {
-    // Accumulate the text from each chunk
     if (chunk.text) {
       fullJsonResponse += chunk.text;
     }
@@ -73,11 +63,11 @@ export async function getAIGeneratedQuestions({ topic, numberOfQuestions }: { to
 }
 
 //for my testing purpose.
-(async () => {
-  try {
-    const generatedQuestions = await getAIGeneratedQuestions({ topic: "Artificial Intelligence", numberOfQuestions: 3 });
-    console.log("Successfully generated questions:", generatedQuestions);
-  } catch (error) {
-    console.error("Failed to generate questions:", error);
-  }
-})();
+// (async () => {
+//   try {
+//     const generatedQuestions = await getAIGeneratedQuestions({ topic: "Artificial Intelligence", numberOfQuestions: 3 });
+//     console.log("Successfully generated questions:", generatedQuestions);
+//   } catch (error) {
+//     console.error("Failed to generate questions:", error);
+//   }
+// })();

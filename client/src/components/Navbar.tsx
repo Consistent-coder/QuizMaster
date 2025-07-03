@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const { user, logout } = useAuth();
@@ -13,7 +14,7 @@ const Navbar = () => {
       <div className="space-x-4 flex items-center">
         {user ? (
           <>
-            <span className="text-gray-700">👋 {user.name}</span>
+            <NavLink to={user.role==="ADMIN"?"/ad/dashboard":"/u/dashboard"} className="text-gray-700 font-bold p-2 rounded-full border-blue-400 border-2 hover:bg-blue-300/50">Dashboard</NavLink>
             <button
               onClick={logout}
               className="text-red-600 hover:text-red-800"
